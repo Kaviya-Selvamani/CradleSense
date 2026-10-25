@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+/* ─── CSS Custom Properties ─── */
+:root,
+[data-theme="dark"] {
+  --navy-950: #030812;
+  --navy-900: #060f1e;
+  --navy-850: #071427;
+  --navy-800: #0a1628;
+  --navy-700: #0d1f3c;
+  --navy-600: #112447;
+  --navy-500: #162d57;
+
+  --panel-bg: rgba(8, 18, 36, 0.92);
+  --panel-border: rgba(56, 139, 253, 0.13);
+  --panel-border-hover: rgba(56, 189, 248, 0.28);
+  --glass-bg: rgba(255, 255, 255, 0.025);
+
+  --header-bg: linear-gradient(90deg, rgba(3,8,18,0.99) 0%, rgba(6,15,30,0.98) 50%, rgba(3,8,18,0.99) 100%);
+  --header-border: rgba(56, 139, 253, 0.14);
+  --sidebar-bg: linear-gradient(180deg, rgba(6,15,30,0.99) 0%, rgba(3,8,18,1) 100%);
+  --sidebar-border: rgba(56, 139, 253, 0.10);
+
+  --card-bg: rgba(8, 18, 36, 0.92);
+  --card-box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+
+  --chip-bg: rgba(255, 255, 255, 0.02);
+  --chip-border: rgba(56, 139, 253, 0.08);
+
+  --table-header-bg: rgba(6, 15, 30, 0.96);
+  --table-row-hover: rgba(56, 139, 253, 0.06);
+  --table-row-alt: rgba(255, 255, 255, 0.008);
+  --table-border: rgba(56, 139, 253, 0.07);
+
+  --blue-primary: #2d7dd2;
+  --blue-accent: #38bdf8;
+  --cyan-accent: #06b6d4;
+  --indigo-accent: #818cf8;
+  --green-ok: #22c55e;
+  --red-alert: #ef4444;
+  --amber-warn: #f59e0b;
+
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-faint: #334155;
+
+  --grid-color: rgba(56, 139, 253, 0.04);
+  --chart-grid: rgba(255, 255, 255, 0.04);
+  --chart-tick: #475569;
+}
+
+[data-theme="light"] {
+  --navy-950: #f8fafc;
+  --navy-900: #f1f5f9;
+  --navy-850: #e2e8f0;
+  --navy-800: #cbd5e1;
+  --navy-700: #94a3b8;
+  --navy-600: #64748b;
+  --navy-500: #475569;
+
+  --panel-bg: rgba(255, 255, 255, 0.96);
+  --panel-border: rgba(226, 232, 240, 0.95);
+  --panel-border-hover: rgba(56, 189, 248, 0.6);
+  --glass-bg: rgba(248, 250, 252, 0.9);
+
+  --header-bg: linear-gradient(90deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.98) 50%, rgba(255,255,255,0.99) 100%);
+  --header-border: rgba(226, 232, 240, 0.95);
+  --sidebar-bg: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  --sidebar-border: rgba(226, 232, 240, 0.95);
+
+  --card-bg: #ffffff;
+  --card-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+
+  --chip-bg: rgba(241, 245, 249, 0.9);
+  --chip-border: rgba(203, 213, 225, 0.8);
+
+  --table-header-bg: rgba(248, 250, 252, 0.98);
+  --table-row-hover: rgba(56, 189, 248, 0.06);
+  --table-row-alt: rgba(248, 250, 252, 0.7);
+  --table-border: rgba(226, 232, 240, 0.8);
+
+  --blue-primary: #0284c7;
+  --blue-accent: #0284c7;
+  --cyan-accent: #0891b2;
+  --indigo-accent: #6366f1;
+  --green-ok: #16a34a;
+  --red-alert: #dc2626;
+  --amber-warn: #d97706;
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+
+  --grid-color: rgba(148, 163, 184, 0.12);
+  --chart-grid: rgba(0, 0, 0, 0.06);
+  --chart-tick: #64748b;
+}
+
+/* ─── Base Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--navy-950);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--navy-950);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 139, 253, 0.25);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-primary);
+}
+
+/* ─── Utility Classes ─── */
+.glass-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--card-box-shadow);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--panel-border-hover);
+}
+
+.mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ─── Background grid pattern ─── */
+.bg-grid {
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* ─── Radial glow for cards ─── */
+.card-glow-red::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(239,68,68,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.card-glow-cyan::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(6,182,212,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.card-glow-amber::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ─── Pulse animation for status dots ─── */
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 1; }
+  80%  { transform: scale(2); opacity: 0; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.status-dot-live::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--green-ok);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.status-dot-alert::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--red-alert);
+  animation: pulse-ring 1s ease-out infinite;
+}
+
+/* ─── Heartbeat animation ─── */
+@keyframes heartbeat {
+  0%   { transform: scale(1); }
+  12%  { transform: scale(1.2); }
+  24%  { transform: scale(1); }
+  36%  { transform: scale(1.1); }
+  48%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+.heartbeat {
+  animation: heartbeat 1.1s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* ─── Slow pulse for SpO2 ─── */
+@keyframes slow-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(0.92); }
+}
+
+.spo2-pulse {
+  animation: slow-pulse 2s ease-in-out infinite;
+}
+
+/* ─── Value flash on update ─── */
+@keyframes value-flash {
+  0%   { opacity: 0.4; transform: translateY(-2px); }
+  60%  { opacity: 1; transform: translateY(1px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.value-flash {
+  animation: value-flash 0.38s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ─── Alert slide-in ─── */
+@keyframes slide-in-down {
+  from { transform: translateY(-8px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(14px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+.alert-appear {
+  animation: slide-in-right 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.alert-banner-appear {
+  animation: slide-in-down 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ─── Fade in ─── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade-in {
+  animation: fade-in 0.4s ease;
+}
+
+/* ─── Scanning line animation ─── */
+@keyframes scan-line {
+  0%   { top: 0%; opacity: 0.6; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.4), transparent);
+  animation: scan-line 4s linear infinite;
+  pointer-events: none;
+}
+
+/* ─── Gradient text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Chart tooltip ─── */
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+/* ─── Sidebar transition ─── */
+.sidebar-transition {
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease, border-color 0.25s ease;
+}
+
+/* ─── Table row hover ─── */
+.data-row {
+  transition: background 0.15s ease;
+}
+.data-row:hover {
+  background: var(--table-row-hover) !important;
+}
+
+/* ─── Glowing border pulse (alert state) ─── */
+@keyframes border-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0), 0 0 20px rgba(239,68,68,0.06); }
+  50%       { box-shadow: 0 0 0 3px rgba(239,68,68,0.12), 0 0 30px rgba(239,68,68,0.18); }
+}
+
+.alert-card-pulse {
+  animation: border-glow-pulse 2s ease-in-out infinite;
+}
+
+/* ─── Ping animation ─── */
+@keyframes ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
